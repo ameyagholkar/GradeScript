@@ -16,10 +16,10 @@ legal_file_types = ['java']
 legal_conversion_types = ['java', 'txt', 'ps']			
 ordering = {'java': '0', 'compile': '1', 'output': '2'};
 #Add the Exercise Name that you are grading. ****** No underscores allowed here. ******
-exerciseName = "Exercise-15"
+exerciseName = "Exercise-8"
 #Gradesheet filename - needs to be modified if the name is different other than what is mentioned. ****** No underscores allowed here. ******				
 gradesheet = ''			
-#Declare path = "" if there no grade-sheet is needed. Make sure you comment the path which is declared here.	
+#Declare path = "" if there no grade-sheet is needed. Make sure you comment the ONLY the path which is declared here; DO NOT comment the Variable.	
 path_of_gradesheet = '' #os.getcwd() + "/" + gradesheet	
 #Mostly should be the same. If there is another Test folder that you are bringing in; make sure you replace the folder name here.
 #****** No underscores allowed here. ******
@@ -33,10 +33,10 @@ root = exerciseName + "/"
 # ---------------------------------- #
 # Add the names of files that have staff test files. Please add the exact Name. Spelling mistakes might make the script crash or Stop.
 # ***** Important ***** TO be kept [''](empty) if there are no staff tests.
-files_to_be_staff_tested = []
+files_to_be_staff_tested = ['']
 # Add the names of files that have input test files in Test Folder. Please add the exact Name. Spelling mistakes might make the script crash or Stop.
 # ***** Important ***** TO be kept [''](empty) if there are no input tests.
-files_to_be_input_tested = ['TriangleType.java']
+files_to_be_input_tested = ['']
 
 # ***** Script Funtionality Begins - Do not Change ***** 
 # Converts to ps.
@@ -100,6 +100,9 @@ def process_files( infile, file_type ):
 					for testFile in tests_listing:
 						if testFile.find(className) != -1:
 							os.system("java " + className + " < " + path_to_test_folder+"/"+testFile + " > " + root_of_file + testFile.split('.')[0]+"_"+unityId + "_" + className + "_output.txt")
+							os.system("java " + className + " < " + path_to_test_folder+"/"+testFile + " 2> " + root_of_file + testFile.split('.')[0]+"_"+unityId + "_" + className + "_Error_Output.txt")
+							if os.stat(root_of_file + testFile.split('.')[0]+"_"+unityId + "_" + className + "_Error_Output.txt").st_size == 0:
+								os.system("echo 'No Output Exceptions' > " + root_of_file + testFile.split('.')[0]+"_"+unityId + "_" + className + "_Error_Output.txt")
 						else:
 							print "------------------------------------------------\n Test : " + testFile + " not for for the classname : "+className+"\n------------------------------------------------"
 							#os.system("java " + className + " > " + path_to_output)		
@@ -110,7 +113,7 @@ def process_files( infile, file_type ):
 				listing = os.listdir(home_path)
 				if fileName in files_to_be_staff_tested:
 					for testfile in listing:
-						if testfile.find(className + "Test") != -1:
+						if testfile.find(className + "TSTest") != -1:
 							print "Found testfile : " + testfile
 							if testfile.find(".class") != -1:
 								os.system("rm " + testfile.split(".")[0] + ".class")
