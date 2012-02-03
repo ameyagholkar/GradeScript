@@ -1,3 +1,5 @@
+Grader Script v1.0 [New version posted at https://github.com/ameyagholkar/GradeScript-v2.0]
+.Made for Java and Moodle.
 The Grader Script will process all the Java and related files in its directory and organize them into folders with respect to the file's UNITY ID if it is present. If not; the script will ignore that file.
 
 It will compile and process the output of all Java files into seperate text files and place them in their respective folders. It then processes all the files in each UNITY folder and converts and concatenates each one of them into a Main Project PDF. Currently, only those files are converted which are listed in the 'legal_conversion_types' list.
